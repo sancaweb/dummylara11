@@ -40,8 +40,8 @@ class LoginController extends Controller
     /**
      * @override
      */
-    // public function username()
-    // {
-    //     return 'username';
-    // }
+    public function username()
+    {
+        return 'username';
+    }
 }
