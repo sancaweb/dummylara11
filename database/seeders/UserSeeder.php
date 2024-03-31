@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -104,6 +105,14 @@ class UserSeeder extends Seeder
 
         $roleAdmin = Role::find(2);
         $roleAdmin->syncPermissions($adminPermissions);
-
+        User::factory(10)->create();
+        // User::factory(10)->create([
+        //     'name' => fake()->name(),
+        //     'username' => fake()->name(),
+        //     'email' => fake()->unique()->safeEmail(),
+        //     'password' => bcrypt('passwordadmin'),
+        //     'email_verified_at' => now(),
+        //     'remember_token' => Str::random(10)
+        //     ]);
     }
 }
