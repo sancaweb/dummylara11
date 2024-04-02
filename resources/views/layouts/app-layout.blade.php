@@ -15,10 +15,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('v1/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('v1/dist/css/adminlte.min.css') }}">
+  @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
 <div class="wrapper">
-
   <!-- Navbar -->
 <x-navbar>
 
@@ -80,5 +80,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('v1/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('v1/dist/js/adminlte.min.js') }}"></script>
+<script>
+    let base_url = "{{ route('root') }}";
+    $('[data-toggle="tooltip"]').tooltip()
+</script>
+@vite(['resources/js/pages/user.js'])
 </body>
 </html>
