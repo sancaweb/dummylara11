@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route("home");
 })->name("root");
 
 Route::view('/user','user.index');
@@ -19,7 +19,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth', 'permission:user read']], function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');
-    Route::post('/user/datatable', [UserController::class, 'datatable'])->name('user.datatable');
+    Route::get('/user/datatable', [UserController::class, 'datatable'])->name('user.datatable');
 });
 
 Route::post('/user', [UserController::class, 'store'])->name('user.store')->middleware(['auth', 'permission:user create']);

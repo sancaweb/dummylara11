@@ -44,4 +44,18 @@ class LoginController extends Controller
     {
         return 'username';
     }
+
+    /**
+     * @override
+     */
+
+     public function showLoginForm()
+    {
+        $dataPage = [
+            'pageTitle' => "Login Form",
+            'page' => 'showLogin',
+        ];
+
+        return view('auth.login',$dataPage);
+    }
 }

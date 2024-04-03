@@ -6,6 +6,7 @@ use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormat;
+use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -148,126 +149,131 @@ class UserController extends Controller
         //
     }
 
-    public function datatable(Request $request)
+    // public function datatable(Request $request)
+    // {
+    //     $columns = array(
+    //         0 => 'id',
+    //         1 => 'foto',
+    //         2 => 'name',
+    //         3 => 'email',
+    //         4 => 'username',
+    //         5 => 'role',
+    //         6 => 'created_at'
+    //     );
+
+    //     $totalData = User::count();
+    //     $totalFiltered = $totalData;
+
+    //     $limit = $request->input('length');
+    //     $start = $request->input('start');
+    //     $order = $columns[$request->input('order.0.column')];
+    //     $dir = $request->input('order.0.dir');
+
+
+    //     // query
+    //     $search = $request->input('search.value');
+    //     $filter = false;
+
+    //     $canDelete = auth()->user()->can('user delete');
+
+
+    //     if ($canDelete) {
+
+    //         $getUsers = User::leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+    //             ->leftJoin('roles', 'model_has_roles.role_id', '=', 'roles.id')
+    //             ->select('users.*', 'roles.name as rolename');
+    //     } else {
+    //         $getUsers = User::leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+    //             ->leftJoin('roles', 'model_has_roles.role_id', '=', 'roles.id')
+    //             ->select('users.*', 'roles.name as rolename')->whereDoesntHave('roles', function ($query) {
+    //                 $query->where('roles.name', 'super admin');
+    //             });
+    //     }
+
+
+    //     //filter - filter
+    //     if (!empty($search)) {
+    //         $getUsers->where(function ($query) use ($search) {
+    //             $query->where('roles.name', 'LIKE', "%{$search}%")
+    //                 ->orWhere('users.name', 'LIKE', "%{$search}%")
+    //                 ->orWhere('username', 'LIKE', "%{$search}%")
+    //                 ->orWhere('email', 'LIKE', "%{$search}%");
+    //         });
+
+
+    //         $filter = true;
+    //     }
+
+    //     //getData
+    //     if ($request->input('order.0.column') == 5) {
+    //         $users = $getUsers->offset($start)
+    //             ->limit($limit)
+    //             ->orderBy('roles.name', $dir)
+    //             ->get();
+    //     } else {
+    //         $users = $getUsers->offset($start)
+    //             ->limit($limit)
+    //             ->orderBy($order, $dir)
+    //             ->get();
+    //     }
+
+    //     if ($filter == true) {
+    //         $totalFiltered = $getUsers->count();
+    //     }
+
+
+    //     $data = array();
+
+
+    //     if (!empty($users)) {
+    //         $no = $start;
+    //         foreach ($users as $user) {
+
+    //             $action = '<button data-id="' . $user->id . '" class="btn btn-primary btn-flat btn-edit">
+    //                     <i class="fas fa-edit"></i>
+    //                 </button>';
+
+    //             if ($canDelete) {
+    //                 $action .= '<button type="button" data-id="' . $user->id . '" class="btn btn-danger btn-flat btn-delete">
+    //                         <i class="fas fa-trash"></i>
+    //                     </button>';
+    //             }
+
+    //             $no++;
+    //             $nestedData['no'] = $no;
+    //             $nestedData['foto'] = '
+    //                     <a href="' . $user->takeImage() . '" data-lightbox="' . $user->name . $user->id . '" data-title="User Foto ' . $user->name . '">
+    //                                 <img src="' . $user->takeImage() . '" alt="Image Foto" style="width: 150px;height: 150px;object-fit:cover;object-position:center;" class="img-thumbnail img-fluid">
+    //                             </a>
+    //             ';
+
+    //             $nestedData['name'] = $user->name;
+    //             $nestedData['email'] = $user->email;
+    //             $nestedData['username'] = $user->username;
+    //             $nestedData['role'] = $user->rolename;
+    //             // $nestedData['role'] = $user->getRoleNames();
+    //             $nestedData['created_at'] = $user->created_at->diffForHumans();
+
+    //             $nestedData['action'] = $action;
+
+    //             $data[] = $nestedData;
+    //         }
+    //     }
+
+    //     $json_data = array(
+    //         "draw"            => intval($request->input('draw')),
+    //         "recordsTotal"    => intval($totalData),
+    //         "recordsFiltered" => intval($totalFiltered),
+    //         "data"            => $data,
+    //         "order"           => $order,
+    //         "dir" => $dir
+    //     );
+
+    //     return response()->json($json_data, 200);
+    // }
+
+    public function datatable()
     {
-        $columns = array(
-            0 => 'id',
-            1 => 'foto',
-            2 => 'name',
-            3 => 'email',
-            4 => 'username',
-            5 => 'role',
-            6 => 'created_at'
-        );
-
-        $totalData = User::count();
-        $totalFiltered = $totalData;
-
-        $limit = $request->input('length');
-        $start = $request->input('start');
-        $order = $columns[$request->input('order.0.column')];
-        $dir = $request->input('order.0.dir');
-
-
-        // query
-        $search = $request->input('search.value');
-        $filter = false;
-
-        $canDelete = auth()->user()->can('user delete');
-
-
-        if ($canDelete) {
-
-            $getUsers = User::leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-                ->leftJoin('roles', 'model_has_roles.role_id', '=', 'roles.id')
-                ->select('users.*', 'roles.name as rolename');
-        } else {
-            $getUsers = User::leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-                ->leftJoin('roles', 'model_has_roles.role_id', '=', 'roles.id')
-                ->select('users.*', 'roles.name as rolename')->whereDoesntHave('roles', function ($query) {
-                    $query->where('roles.name', 'super admin');
-                });
-        }
-
-
-        //filter - filter
-        if (!empty($search)) {
-            $getUsers->where(function ($query) use ($search) {
-                $query->where('roles.name', 'LIKE', "%{$search}%")
-                    ->orWhere('users.name', 'LIKE', "%{$search}%")
-                    ->orWhere('username', 'LIKE', "%{$search}%")
-                    ->orWhere('email', 'LIKE', "%{$search}%");
-            });
-
-
-            $filter = true;
-        }
-
-        //getData
-        if ($request->input('order.0.column') == 5) {
-            $users = $getUsers->offset($start)
-                ->limit($limit)
-                ->orderBy('roles.name', $dir)
-                ->get();
-        } else {
-            $users = $getUsers->offset($start)
-                ->limit($limit)
-                ->orderBy($order, $dir)
-                ->get();
-        }
-
-        if ($filter == true) {
-            $totalFiltered = $getUsers->count();
-        }
-
-
-        $data = array();
-
-
-        if (!empty($users)) {
-            $no = $start;
-            foreach ($users as $user) {
-
-                $action = '<button data-id="' . $user->id . '" class="btn btn-primary btn-flat btn-edit">
-                        <i class="fas fa-edit"></i>
-                    </button>';
-
-                if ($canDelete) {
-                    $action .= '<button type="button" data-id="' . $user->id . '" class="btn btn-danger btn-flat btn-delete">
-                            <i class="fas fa-trash"></i>
-                        </button>';
-                }
-
-                $no++;
-                $nestedData['no'] = $no;
-                $nestedData['foto'] = '
-                        <a href="' . $user->takeImage() . '" data-lightbox="' . $user->name . $user->id . '" data-title="User Foto ' . $user->name . '">
-                                    <img src="' . $user->takeImage() . '" alt="Image Foto" style="width: 150px;height: 150px;object-fit:cover;object-position:center;" class="img-thumbnail img-fluid">
-                                </a>
-                ';
-
-                $nestedData['name'] = $user->name;
-                $nestedData['email'] = $user->email;
-                $nestedData['username'] = $user->username;
-                $nestedData['role'] = $user->rolename;
-                // $nestedData['role'] = $user->getRoleNames();
-                $nestedData['created_at'] = $user->created_at->diffForHumans();
-
-                $nestedData['action'] = $action;
-
-                $data[] = $nestedData;
-            }
-        }
-
-        $json_data = array(
-            "draw"            => intval($request->input('draw')),
-            "recordsTotal"    => intval($totalData),
-            "recordsFiltered" => intval($totalFiltered),
-            "data"            => $data,
-            "order"           => $order,
-            "dir" => $dir
-        );
-
-        return response()->json($json_data, 200);
+        return DataTables::of(User::query())->toJson();
     }
 }
