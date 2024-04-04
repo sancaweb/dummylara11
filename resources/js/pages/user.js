@@ -88,6 +88,18 @@ $(function () {
                 orderable: false,
                 targets: [0, 1, -1],
             },
+            {
+                targets: [1,-1],
+                createdCell: function (td, cellData, rowData, row, col) {
+                    $(td).addClass("text-center");
+                },
+            },
+            {
+                targets: [0],
+                createdCell: function (td, cellData, rowData, row, col) {
+                    $(td).addClass("text-right");
+                },
+            },
         ],
     });
     $("#table-user_filter input").off();

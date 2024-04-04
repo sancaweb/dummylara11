@@ -24,17 +24,17 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="table-user" class="table table-bordered table-hover">
-                            <thead class="bg-info">
+                        <table id="table-user" class="table table-bordered table-hover table-striped">
+                            <thead >
                                 <tr>
-                                    <th>NO</th>
-                                    <th>Foto</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Username</th>
-                                    <th>Role</th>
-                                    <th>Created</th>
-                                    <th>Action</th>
+                                    <th class="bg-info text-center">NO</th>
+                                    <th class="bg-info text-center">Foto</th>
+                                    <th class="bg-info text-center">Nama</th>
+                                    <th class="bg-info text-center">Email</th>
+                                    <th class="bg-info text-center">Username</th>
+                                    <th class="bg-info text-center">Role</th>
+                                    <th class="bg-info text-center">Created</th>
+                                    <th class="bg-info text-center">Action</th>
                                 </tr>
                             </thead>
 

@@ -61,4 +61,9 @@ class User extends Authenticatable
             }
         }
     }
+
+    private static function isRoleExists($name)
+    {
+        return Role::where('name', $name)->exists() ? true : false;
+    }
 }
