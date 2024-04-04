@@ -5,6 +5,7 @@ $(function () {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
     });
+
     $.fn.modal.Constructor.prototype._enforceFocus = function () {};
 
     var columnsTable = [

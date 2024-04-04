@@ -46,4 +46,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function takeImage()
+    {
+        if ($this->foto === null) {
+            return asset("images/no-image.png");
+        } else {
+            $exist = Storage::exists($this->foto);
+
+            if ($exist) {
+                return asset("storage/" . $this->foto);
+            } else {
+                return asset("images/no-image.png");
+            }
+        }
+    }
 }
