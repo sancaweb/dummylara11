@@ -122,65 +122,68 @@ $(function () {
 
     // /** ./end datatable */
 
-    // $("#inputFoto").on("change", function () {
-    //     var review = "imageReview";
-    //     var linkFoto = "linkFoto";
-    //     readURL(this, review, linkFoto);
-    // });
+    $("#inputFoto").on("change", function () {
+        var review = "imageReview";
+        var linkFoto = "linkFoto";
+        readURL(this, review, linkFoto);
+    });
 
-    // function readURL(input, review, linkFoto) {
-    //     if (input.files && input.files[0]) {
-    //         var reader = new FileReader();
+    function readURL(input, review, linkFoto) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-    //         reader.onload = function (e) {
-    //             $("#" + review).attr("src", e.target.result);
-    //             $("#" + linkFoto).attr("href", e.target.result);
-    //             $(input).next(".custom-file-label").html(input.files[0].name);
-    //         };
+            reader.onload = function (e) {
+                $("#" + review).attr("src", e.target.result);
+                $("#" + linkFoto).attr("href", e.target.result);
+                $(input).next(".custom-file-label").html(input.files[0].name);
+            };
 
-    //         reader.readAsDataURL(input.files[0]); // convert to base64 string
-    //     }
-    // }
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
 
-    // function formReset() {
-    //     $("#formUser")[0].reset();
-    //     $("#formUser").attr("action", base_url + "/user");
-    //     $("#role").val("").trigger("change");
-    //     $('[name="_method"]').remove();
-    //     $("#imageReview").attr("src", base_url + "/images/no-image.png");
-    //     $("#linkFoto").attr("href", base_url + "/images/no-image.png");
+    function formReset() {
+        $("#formUser")[0].reset();
+        $("#formUser").attr("action", base_url + "/user");
+        $("#role").val("").trigger("change");
+        $('[name="_method"]').remove();
+        $("#imageReview").attr("src", base_url + "/images/no-image.png");
+        $("#linkFoto").attr("href", base_url + "/images/no-image.png");
 
-    //     $("#modalFormInputLabel").html(
-    //         '<i class="fas fa-user-plus"></i>&nbsp; Add User'
-    //     );
-    // }
+        $("#modalFormInputLabel").html(
+            '<i class="fas fa-user-plus"></i>&nbsp; Add User'
+        );
+    }
 
-    // $(".openForm").on("click", function () {
-    //     openForm();
-    // });
+    $(".openForm").on("click", function () {
 
-    // $(".closeForm").on("click", function () {
-    //     closeForm();
-    // });
+        openForm();
+    });
 
-    // function openForm() {
-    //     $("#modalFormInput").modal({
-    //         show: true,
-    //         backdrop: "static",
-    //         keyboard: false, // to prevent closing with Esc button (if you want this too)
-    //     });
-    // }
+    $(".closeForm").on("click", function () {
+        closeForm();
+    });
 
-    // function closeForm() {
-    //     $("#modalFormInput").modal("hide");
-    //     formReset();
-    // }
+    function openForm() {
+        console.log("Opened");
 
-    // $("#role").select2({
-    //     theme: "bootstrap4",
-    //     placeholder: "Select Role",
-    //     allowClear: true,
-    // });
+        $("#modalFormInput").modal({
+            show: true,
+            backdrop: "static",
+            keyboard: false, // to prevent closing with Esc button (if you want this too)
+        });
+    }
+
+    function closeForm() {
+        $("#modalFormInput").modal("hide");
+        formReset();
+    }
+
+    $("#role").select2({
+        theme: "bootstrap4",
+        placeholder: "Select Role",
+        allowClear: true,
+    });
 
     // $("#formUser").on("submit", function (e) {
     //     e.preventDefault();

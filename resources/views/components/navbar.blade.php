@@ -15,10 +15,13 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="index3.html" class="nav-link">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="#" class="nav-link">Destructive Test</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Macro</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
@@ -53,7 +56,17 @@
             </ul>
 
 
-        </div>
+        </div> <!-- ./end left navbar -->
+
+        <!-- right navbar -->
+        <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+            <!-- Messages Dropdown Menu -->
+            <li class="nav-item ">
+              <a class="nav-link"href="#">
+                <i class="nav-icon fas fa-sign-out-alt"></i> &nbsp; Logout
+              </a>
+            </li>
+          </ul>
 
     </div>
 </nav>

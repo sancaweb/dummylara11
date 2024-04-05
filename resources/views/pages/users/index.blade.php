@@ -14,27 +14,28 @@
                             <button id="btn-userReload" type="button" class="btn btn-sm btn-flat btn-success">
                                 <i class="fas fa-sync"></i> &nbsp; Reload
                             </button>
-                            @can('user delete')
+
+                            {{-- @can('user delete')
                                 <a href="{{ route('user.trash') }}" type="button" class="btn btn-sm btn-flat btn-danger">
                                     <i class="fas fa-trash"></i> &nbsp; Users Trash
                                 </a>
-                            @endcan
+                            @endcan --}}
 
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body">
+                    <div class="card-body table-responsive">
                         <table id="table-user" class="table table-bordered table-hover table-striped">
                             <thead >
                                 <tr>
                                     <th class="bg-info text-center">NO</th>
-                                    <th class="bg-info text-center">Foto</th>
-                                    <th class="bg-info text-center">Nama</th>
-                                    <th class="bg-info text-center">Email</th>
-                                    <th class="bg-info text-center">Username</th>
-                                    <th class="bg-info text-center">Role</th>
-                                    <th class="bg-info text-center">Created</th>
-                                    <th class="bg-info text-center">Action</th>
+                                    <th class="bg-info text-center">FOTO</th>
+                                    <th class="bg-info text-center">NAMA</th>
+                                    <th class="bg-info text-center">EMAIL</th>
+                                    <th class="bg-info text-center">USERNAME</th>
+                                    <th class="bg-info text-center">ROLE</th>
+                                    <th class="bg-info text-center">CREATED</th>
+                                    <th class="bg-info text-center">ACTION</th>
                                 </tr>
                             </thead>
 
@@ -52,4 +53,6 @@
         </div>
         <!-- /.row -->
     </div><!-- /.container-fluid -->
+
+    @include('pages.users.modalFormInput')
 @endsection

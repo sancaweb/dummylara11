@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $pageTitle . ' || ' . config('app.name') }}</title>
-<!-- CSRF Token -->
-<meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{{ asset('v1/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('v1/plugins/fontawesome/css/all.min.css') }}">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('v1/plugins/select2/css/select2.min.css') }}">
 
     @if ($page == 'user')
         <!-- DataTables -->
-        <link rel="stylesheet" href="{{ asset('v1/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('v1/plugins/datatables/datatables.min.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('v1/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('v1/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('v1/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('v1/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}"> --}}
     @endif
 
     <!-- Theme style -->
@@ -29,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
-<body class="hold-transition layout-top-nav layout-navbar-fixed">
+<body class="hold-transition layout-top-nav layout-navbar-fixed dark-mode">
     <div class="wrapper">
         <!-- Navbar -->
         <x-navbar>
@@ -94,7 +94,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ asset('v1/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- DataTables  & Plugins -->
-    <script src="{{ asset('v1/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('v1/plugins/datatables/datatables.min.js') }}"></script>
+    {{-- <script src="{{ asset('v1/plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('v1/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('v1/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('v1/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
@@ -105,13 +106,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ asset('v1/plugins/pdfmake/vfs_fonts.js') }}"></script>
     <script src="{{ asset('v1/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('v1/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('v1/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('v1/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script> --}}
 
     <!-- AdminLTE App -->
     <script src="{{ asset('v1/dist/js/adminlte.min.js') }}"></script>
+
+    <!-- SELECT2 -->
+    <script src="{{ asset('v1/plugins/select2/js/select2.full.min.js') }}"></script>
+
     <script>
         let base_url = "{{ route('root') }}";
-        $('[data-toggle="tooltip"]').tooltip()
+        // $('[data-toggle="tooltip"]').tooltip()
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
     </script>
     @vite(['resources/js/pages/user.js'])
 </body>

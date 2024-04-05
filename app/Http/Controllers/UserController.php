@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Helpers\ResponseFormat;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -17,16 +18,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        // if (auth()->user()) {
-        //     $roles = Role::all()->pluck('name');
-        // } else {
-        //     $roles = Role::whereNotIn('name', ['super admin'])->pluck('name');
-        // }
+        if (auth()->user()) {
+            $roles = Role::all()->pluck('name');
+        } else {
+            $roles = Role::whereNotIn('name', ['super admin'])->pluck('name');
+        }
 
         $dataPage = [
             'pageTitle' => "User Management",
             'page' => 'user',
-            // 'roles' => $roles,
+            'roles' => $roles,
             'action' => route('user.store')
         ];
 
@@ -243,7 +244,7 @@ class UserController extends Controller
                 $nestedData['no'] = $no;
                 $nestedData['foto'] = '
                         <a href="' . $user->takeImage() . '" data-lightbox="' . $user->name . $user->id . '" data-title="User Foto ' . $user->name . '">
-                                    <img src="' . $user->takeImage() . '" alt="Image Foto" style="width: 150px;height: 150px;object-fit:cover;object-position:center;" class="img-thumbnail img-fluid">
+                                    <img src="' . $user->takeImage() . '" alt="Image Foto" style="width: 150px;object-fit:cover;object-position:center;" class="img-thumbnail img-fluid">
                                 </a>
                 ';
 
