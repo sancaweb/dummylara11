@@ -1,7 +1,8 @@
-<div class="modal fade" id="modalFormInput" tabindex="-1" role="dialog" aria-labelledby="modalFormInputLabel"
+<div class="modal fade" id="modalFormInput" role="dialog" aria-labelledby="modalFormInputLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <form action="{{ route('user.store') }}" method="POST" id="formUser" enctype="multipart/form-data">
+
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -68,6 +69,9 @@
                         <label>Roles</label>
                         <select class="form-control select2" name="role" id="role">
                             <option value=""></option>
+                            {{-- <option value="1">satu</option>
+                            <option value="2">dua</option>
+                            <option value="3">tiga</option> --}}
                             @foreach ($roles as $key => $role)
                                 <option value="{{ $role }}">{{ ucwords($role) }}</option>
                             @endforeach

@@ -15,11 +15,11 @@
                                 <i class="fas fa-sync"></i> &nbsp; Reload
                             </button>
 
-                            {{-- @can('user delete')
+                            @can('user delete')
                                 <a href="{{ route('user.trash') }}" type="button" class="btn btn-sm btn-flat btn-danger">
                                     <i class="fas fa-trash"></i> &nbsp; Users Trash
                                 </a>
-                            @endcan --}}
+                            @endcan
 
                         </div>
                     </div>

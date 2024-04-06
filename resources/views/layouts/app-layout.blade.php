@@ -15,18 +15,18 @@
 
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('v1/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('v1/plugins/select2/css/select2-bootstrap-5-theme.min.css') }}">
 
-    @if ($page == 'user')
-        <!-- DataTables -->
-        <link rel="stylesheet" href="{{ asset('v1/plugins/datatables/datatables.min.css') }}">
-        {{-- <link rel="stylesheet" href="{{ asset('v1/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('v1/plugins/datatables/datatables.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('v1/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('v1/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('v1/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}"> --}}
-    @endif
+
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('v1/dist/css/adminlte.min.css') }}">
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="hold-transition layout-top-nav layout-navbar-fixed dark-mode">
@@ -84,7 +84,36 @@
         </footer>
     </div>
     <!-- ./wrapper -->
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.
 
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button
+                        onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();"
+                        class="btn btn-primary" type="button">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:
+            none;">
+        @csrf
+    </form>
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
@@ -92,6 +121,7 @@
 
     <!-- Bootstrap 4 -->
     <script src="{{ asset('v1/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
 
     <!-- DataTables  & Plugins -->
     <script src="{{ asset('v1/plugins/datatables/datatables.min.js') }}"></script>
@@ -113,6 +143,7 @@
 
     <!-- SELECT2 -->
     <script src="{{ asset('v1/plugins/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('v1/plugins/select2/js/select2.full.min.js') }}"></script>
 
     <script>
         let base_url = "{{ route('root') }}";
@@ -123,7 +154,17 @@
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
     </script>
-    @vite(['resources/js/pages/user.js'])
+    @if ($page == 'user')
+        @vite(['resources/js/pages/user.js'])
+    @endif
+
+    @if ($page == 'userTrash')
+        @vite(['resources/js/pages/userTrash.js'])
+    @endif
+
+    @if ($page=='rolePermission')
+    @vite(['resources/js/pages/rolePermission.js'])
+    @endif
 </body>
 
 </html>
