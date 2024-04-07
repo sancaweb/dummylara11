@@ -442,7 +442,7 @@ class RolePermissionController extends Controller
             'permissionsDua' => $permissionsDua
         ];
 
-        return view('rolesPermissions.assignPermission', $dataPage);
+        return view('pages.rolesPermissions.assignPermission', $dataPage);
     }
 
     public function viewPermissions($id = null)
@@ -536,7 +536,6 @@ class RolePermissionController extends Controller
         if (!empty($search)) {
             $getRoles->where(function ($query) use ($search) {
                 $query->where('roles.name', 'ILIKE', "%{$search}%");
-                // ->orWhere('permissions.name', 'LIKE', "%{$search}%");
             });
 
             $filter = true;

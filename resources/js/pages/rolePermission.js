@@ -35,9 +35,9 @@ $(function () {
             },
         ],
     });
-    $("#table-role_filter input").unbind();
-    $("#table-role_filter input").bind("keyup", function (e) {
-        if (e.keyCode == 13) {
+    $("#table-role_filter input").off();
+    $("#table-role_filter input").on("keyup", function (e) {
+        if (e.code == "Enter") {
             tableRoles.search(this.value).draw();
         }
     });
@@ -500,120 +500,120 @@ $(function () {
     });
     //./end submit Permission
 
-    // // edit Permission
+    // edit Permission
 
-    // /** Proses edit */
-    // $("#table-permissions").on("click", ".btn-edit", function () {
-    //     Swal.fire({
-    //         imageHeight: 300,
-    //         showConfirmButton: false,
-    //         title: '<i class="fas fa-spinner fa-pulse fa-10x" ></i>',
-    //         text: "Loading ...",
-    //         allowOutsideClick: false,
-    //         timerProgressBar: true,
-    //     });
+    /** Proses edit */
+    $("#table-permissions").on("click", ".btn-edit", function () {
+        Swal.fire({
+            imageHeight: 300,
+            showConfirmButton: false,
+            title: '<i class="fas fa-spinner fa-pulse fa-10x" ></i>',
+            text: "Loading ...",
+            allowOutsideClick: false,
+            timerProgressBar: true,
+        });
 
-    //     var idPermission = $(this).data("id");
-    //     var urlEdit = base_url + "/permission/" + idPermission + "/edit";
+        var idPermission = $(this).data("id");
+        var urlEdit = base_url + "/permission/" + idPermission + "/edit";
 
-    //     $.ajax({
-    //         url: urlEdit,
-    //         type: "get",
-    //         success: function (x) {
-    //             var dataPermission = x.data.permission;
+        $.ajax({
+            url: urlEdit,
+            type: "get",
+            success: function (x) {
+                var dataPermission = x.data.permission;
 
-    //             $("#formPermission").attr("action", x.data.action);
-    //             $('<input name="_method" value="patch">')
-    //                 .attr("type", "hidden")
-    //                 .appendTo("#formPermission");
-    //             $("#modalFormInputPermissionLabel").html(
-    //                 '<i class="fas fa-user-shield"></i>&nbsp; Edit Permission'
-    //             );
+                $("#formPermission").attr("action", x.data.action);
+                $('<input name="_method" value="patch">')
+                    .attr("type", "hidden")
+                    .appendTo("#formPermission");
+                $("#modalFormInputPermissionLabel").html(
+                    '<i class="fas fa-user-shield"></i>&nbsp; Edit Permission'
+                );
 
-    //             $('[name="permissionName"]').val(dataPermission.name);
+                $('[name="permissionName"]').val(dataPermission.name);
 
-    //             openFormPermission();
-    //             Swal.close();
-    //         },
-    //         error: function (jqXHR, textStatus, errorThrown) {
-    //             var meta = jqXHR.responseJSON.meta;
-    //             var data = jqXHR.responseJSON.data;
+                openFormPermission();
+                Swal.close();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                var meta = jqXHR.responseJSON.meta;
+                var data = jqXHR.responseJSON.data;
 
-    //             Swal.fire({
-    //                 icon: "error",
-    //                 title: meta.message,
-    //                 html:
-    //                     '<div class="alert alert-danger text-left" role="alert">' +
-    //                     "<p>" +
-    //                     data.error +
-    //                     "</p>" +
-    //                     "</div>",
-    //                 allowOutsideClick: false,
-    //             });
-    //         },
-    //     });
-    // });
-    // //./end edit Permission
+                Swal.fire({
+                    icon: "error",
+                    title: meta.message,
+                    html:
+                        '<div class="alert alert-danger text-left" role="alert">' +
+                        "<p>" +
+                        data.error +
+                        "</p>" +
+                        "</div>",
+                    allowOutsideClick: false,
+                });
+            },
+        });
+    });
+    //./end edit Permission
 
-    // //delete Permission
-    // $("#table-permissions").on("click", ".btn-delete", function () {
-    //     closeFormPermission();
-    //     Swal.fire({
-    //         title: "Anda yakin?",
-    //         text: "Anda yakin ingin menghapus data?",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Yes, delete it!",
-    //         allowOutsideClick: false,
-    //     }).then((result) => {
-    //         if (result.value) {
-    //             Swal.fire({
-    //                 imageHeight: 300,
-    //                 showConfirmButton: false,
-    //                 title: '<i class="fas fa-spinner fa-pulse fa-10x" ></i>',
-    //                 text: "Loading ...",
-    //                 allowOutsideClick: false,
-    //                 timerProgressBar: true,
-    //             });
+    //delete Permission
+    $("#table-permissions").on("click", ".btn-delete", function () {
+        closeFormPermission();
+        Swal.fire({
+            title: "Anda yakin?",
+            text: "Anda yakin ingin menghapus data?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+            allowOutsideClick: false,
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire({
+                    imageHeight: 300,
+                    showConfirmButton: false,
+                    title: '<i class="fas fa-spinner fa-pulse fa-10x" ></i>',
+                    text: "Loading ...",
+                    allowOutsideClick: false,
+                    timerProgressBar: true,
+                });
 
-    //             var idPermission = $(this).data("id");
-    //             var urlDelete =
-    //                 base_url + "/permission/" + idPermission + "/delete";
-    //             $.ajax({
-    //                 url: urlDelete,
-    //                 type: "POST",
-    //                 data: {
-    //                     _method: "delete",
-    //                 },
-    //                 dataType: "JSON",
-    //                 success: function (data) {
-    //                     Swal.fire({
-    //                         icon: "success",
-    //                         title: data.data.message,
-    //                         showConfirmButton: false,
-    //                         timer: 2000,
-    //                         allowOutsideClick: false,
-    //                     }).then(function () {
-    //                         refreshTablePermission();
-    //                     });
-    //                 },
-    //                 error: function (jqXHR, textStatus, errorThrown) {
-    //                     var error = jqXHR.responseJSON;
-    //                     Swal.fire({
-    //                         icon: "error",
-    //                         title: error.meta.message,
-    //                         showConfirmButton: false,
-    //                         timer: 2000,
-    //                         allowOutsideClick: false,
-    //                     });
-    //                 },
-    //             });
-    //         }
-    //     });
-    // });
-    //./end Delete Permission
+                var idPermission = $(this).data("id");
+                var urlDelete =
+                    base_url + "/permission/" + idPermission + "/delete";
+                $.ajax({
+                    url: urlDelete,
+                    type: "POST",
+                    data: {
+                        _method: "delete",
+                    },
+                    dataType: "JSON",
+                    success: function (data) {
+                        Swal.fire({
+                            icon: "success",
+                            title: data.data.message,
+                            showConfirmButton: false,
+                            timer: 2000,
+                            allowOutsideClick: false,
+                        }).then(function () {
+                            refreshTablePermission();
+                        });
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        var error = jqXHR.responseJSON;
+                        Swal.fire({
+                            icon: "error",
+                            title: error.meta.message,
+                            showConfirmButton: false,
+                            timer: 2000,
+                            allowOutsideClick: false,
+                        });
+                    },
+                });
+            }
+        });
+    });
+    // ./end Delete Permission
 
     /**
      * ./END PERMISSION PROCES

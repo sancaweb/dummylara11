@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\RolePermissionController;
 
 Route::get('/', function () {
@@ -69,6 +70,13 @@ Route::group(['middleware' => ['auth', 'role:super admin']], function () {
     Route::get('/assignpermission/{id}/viewpermission', [RolePermissionController::class, 'viewPermissions'])->name('assignPermission.viewPermissions');
     Route::post('/assignpermission', [RolePermissionController::class, 'storeAssign'])->name('assignPermission.store');
     Route::post('/assignpermission/datatable', [RolePermissionController::class, 'datatableAssign'])->name('assignPermission.datatable');
+
+
+    /** ACTIVITIES */
+    Route::get('/activity', [ActivityController::class, 'index'])->name('activity');
+    Route::post('/activity/datatable', [ActivityController::class, 'datatable'])->name('activity.datatable');
+    Route::get('/activity/{activity}/show', [ActivityController::class, 'show'])->name('activity.show');
+
 
 });
 

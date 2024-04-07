@@ -42,7 +42,7 @@
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row mb-2">
+                    <div class="row">
                         <div class="col-sm-6">
                             <h1 class="m-0"> {{ $pageTitle }}</h1>
                         </div><!-- /.col -->
@@ -162,8 +162,14 @@
         @vite(['resources/js/pages/userTrash.js'])
     @endif
 
-    @if ($page=='rolePermission')
-    @vite(['resources/js/pages/rolePermission.js'])
+    @if ($page == 'rolePermission')
+        @vite(['resources/js/pages/rolePermission.js'])
+    @endif
+    @if ($page == 'assignPermission')
+        @vite(['resources/js/pages/assignPermission.js'])
+    @endif
+    @if ($page == 'activity')
+        @vite(['resources/js/pages/activity.js'])
     @endif
 </body>
 

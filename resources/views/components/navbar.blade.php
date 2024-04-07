@@ -16,27 +16,24 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a href="{{ route('root') }}" class="nav-link">
-                        <i class="fas fa-tachometer-alt"></i>
-                        &nbsp; Dashboard</a>
+                        <i class="fas fa-tachometer-alt"></i>&nbsp;Dashboard</a>
                 </li>
                 @auth
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-hammer"></i>
-                        &nbsp; Destructive Test</a>
+                        <i class="fas fa-hammer"></i>&nbsp;Destructive Test</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-microscope"></i>
-                        &nbsp; Macro</a>
+                        <i class="fas fa-microscope"></i>&nbsp;Macro</a>
                 </li>
+
                 @role('super admin')
                 <li class="nav-item dropdown">
                     <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false" class="nav-link dropdown-toggle">
-                        <i class="nav-icon fas fa-user-shield"></i>&nbsp;
-                        Users</a>
+                        <i class="nav-icon fas fa-user-shield"></i>&nbsp;Users</a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
 
                         <li>
@@ -57,7 +54,7 @@
                                 <li>
                                     <a tabindex="-1" href="{{ route('rolepermission') }}" class="dropdown-item">Data</a>
                                 </li>
-                                <li><a href="#" class="dropdown-item"> Assign Permissions</a></li>
+                                <li><a href="{{ route('assignPermission.assign') }}" class="dropdown-item"> Assign Permissions</a></li>
                             </ul>
                         </li>
                         <!-- End Level two -->
@@ -68,6 +65,28 @@
 
                     </ul>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a id="dropDownTools" href="#" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" class="nav-link dropdown-toggle">
+                        <i class="nav-icon fas fa-tools"></i>&nbsp;Tools</a>
+                    <ul aria-labelledby="dropDownTools" class="dropdown-menu border-0 shadow">
+
+                        <li>
+                            <a href="{{ route('activity') }}" class="nav-link">
+                                <i class="fas fa-history"></i>&nbsp;Logs</a>
+                        </li>
+
+                        <li class="dropdown-divider"></li>
+
+
+
+
+
+                    </ul>
+                </li>
+
+
                 @endrole
                 <li class="nav-item ">
                     <a href="#" class="nav-link" data-toggle="modal"
