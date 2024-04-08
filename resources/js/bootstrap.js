@@ -16,6 +16,13 @@ window.lightbox = lightbox;
 import axios from 'axios';
 window.axios = axios;
 
+import moment from 'moment';
+window.moment = moment;
+
+import { DateRangePicker,Datepicker } from 'vanillajs-datepicker';
+window.DateRangePicker = DateRangePicker;
+window.Datepicker = Datepicker;
+
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 

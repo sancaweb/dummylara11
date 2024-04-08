@@ -23,6 +23,8 @@
         <link rel="stylesheet" href="{{ asset('v1/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('v1/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}"> --}}
 
+    <!-- gjigo bootstrap-5 datepicker -->
+    {{-- <link rel="stylesheet" href="{{ asset('v1/plugins/gjigo-bootstrap5-datepicker/css/gijgo.min.css') }}"> --}}
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('v1/dist/css/adminlte.min.css') }}">
@@ -141,6 +143,9 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('v1/dist/js/adminlte.min.js') }}"></script>
 
+    <!-- gijgo bootstrap5 datepicker -->
+    {{-- <script src="{{ asset('v1/plugins/gjigo-bootstrap5-datepicker/js/gijgo.min.js') }}"></script> --}}
+
     <!-- SELECT2 -->
     <script src="{{ asset('v1/plugins/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('v1/plugins/select2/js/select2.full.min.js') }}"></script>
@@ -153,7 +158,12 @@
         var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
+
+        // var tanggal = moment().format();
+
+        // console.log(tanggal);
     </script>
+
     @if ($page == 'user')
         @vite(['resources/js/pages/user.js'])
     @endif

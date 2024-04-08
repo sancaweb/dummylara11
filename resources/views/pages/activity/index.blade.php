@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body">
+                    <div class="card-body table-responsive">
                         <table id="table-activity" class="table table-bordered table-hover">
                             <thead class="bg-info">
                                 <tr>

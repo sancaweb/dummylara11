@@ -1,35 +1,32 @@
+import moment from "moment";
+import { DateRangePicker } from "vanillajs-datepicker";
+
 $(function () {
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
     });
+// console.log(moment().format("DD-MM-YYYY"));
+    const elem = document.getElementById("dateRangeFilter");
+    const datePickerOpt = {
+        clearButton:true,
+        buttonClass: 'btn',
+        format:"dd/mm/yyyy",
+        maxDate:moment().format("DD-MM-YYYY")
+    };
+    new DateRangePicker(elem,datePickerOpt);
 
-    //Date range picker
-    $(".rangeDate").daterangepicker(
-        {
-            autoUpdateInput: false,
-            locale: {
-                format: "DD/MM/YYYY",
-            },
-        },
-        function (start, end, label) {
-            var choosen_val =
-                start.format("DD/MM/YYYY") + " - " + end.format("DD/MM/YYYY");
-            $(".rangeDate").val(choosen_val);
-        }
-    );
-
-    $(".rangeDate").val();
+    // $(".rangeDate").val();
 
     $("#userAct").select2({
-        theme: "bootstrap4",
+        theme: "bootstrap-5",
         placeholder: "Select User",
         allowClear: true,
     });
 
     $("#logNameAct").select2({
-        theme: "bootstrap4",
+        theme: "bootstrap-5",
         placeholder: "Select Log Name",
         allowClear: true,
     });
@@ -55,12 +52,14 @@ $(function () {
             data: function (dataFilter) {
                 var userAct = $("#userAct").val();
                 var logNameAct = $("#logNameAct").val();
-                var dateRangeFilter = $("#dateRangeFilter").val();
+                var rangeStart = $("#rangeStart").val();
+                var rangeEnd = $("#rangeEnd").val();
                 var descAct = $("#descAct").val();
 
                 dataFilter.userAct = userAct;
                 dataFilter.logNameAct = logNameAct;
-                dataFilter.dateRangeFilter = dateRangeFilter;
+                dataFilter.rangeStart = rangeStart;
+                dataFilter.rangeEnd = rangeEnd;
                 dataFilter.descAct = descAct;
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -125,7 +124,6 @@ $(function () {
 
     function refreshTable() {
         tableActivity.search("").draw();
-        // tableActivity.ajax.reload();
     }
 
     var btnReloadActivity = document.getElementById("btn-activityReload");
@@ -144,9 +142,6 @@ $(function () {
     $("#closeCard").on("click", function () {
         closeCard();
     });
-    $("#formReset").on("click", function () {
-        formReset();
-    });
 
     function closeCard() {
         var elementLink = document.getElementById("cardFormUser");
@@ -162,24 +157,28 @@ $(function () {
         $(".collapse").collapse("show");
     }
 
-    function formReset() {
-        $("#formUser")[0].reset();
-        $("#formUser").attr("action", base_url + "/user");
-        $("#role").val("");
-        $('[name="_method"]').remove();
-        closeCard();
-    }
 
     $("#btn-resetFilter").on("click", function () {
-        $("#userAct").val("");
-        $("#logNameAct").val("");
+        $("#userAct").val("").trigger('change');
+        $("#logNameAct").val("").trigger('change');
         $("#descAct").val("");
-        $("#dateRangeFilter").val("");
+        $("#rangeStart").val("");
+        $("#rangeEnd").val("");
+        closeCard();
     });
 
     $("#btn-filter").on("click", function () {
         tableActivity.draw();
     });
+
+    var modalDetailOptions = {
+        backdrop: false,
+        keyboard:false
+    };
+    var modalDetail = new bootstrap.Modal(
+        document.getElementById("detailAct"),
+        modalDetailOptions
+    );
 
     $("#table-activity").on("click", ".btn-detail", function () {
         Swal.fire({
@@ -206,11 +205,7 @@ $(function () {
                 $("#txt_created").val(dataAct.created_at);
 
                 Swal.close();
-                $("#detailAct").modal({
-                    show: true,
-                    backdrop: "static",
-                    keyboard: false, // to prevent closing with Esc button (if you want this too)
-                });
+                modalDetail.show();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 var meta = jqXHR.responseJSON.meta;

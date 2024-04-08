@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Helpers\ResponseFormat;
 use Spatie\Activitylog\Models\Activity;
 
 class ActivityController extends Controller
@@ -43,7 +44,6 @@ class ActivityController extends Controller
                 'user' => $user,
                 'log_name' => $activity->log_name,
                 'description' => $activity->description,
-                // 'properties' => $properties,
                 'properties' => $activity->properties,
                 'created_at' => $activity->created_at->translatedFormat('j F Y H:i:s'),
             ], "Data Activity ditemukan");
@@ -78,7 +78,8 @@ class ActivityController extends Controller
         $userAct = $request->input('userAct');
         $logNameAct = $request->input('logNameAct');
         $descAct = $request->input('descAct');
-        $dateRangeFilter = $request->input('dateRangeFilter');
+        $rangeStart = $request->input('rangeStart');
+        $rangeEnd = $request->input('rangeEnd');
 
 
 
@@ -102,22 +103,17 @@ class ActivityController extends Controller
             $filter = true;
         }
 
-        if (!empty($dateRangeFilter)) {
-
-            $exDateRange = explode('-', $dateRangeFilter);
-            $pertamaRep = str_replace('/', '-', trim($exDateRange[0]));
-            $duaRep = str_replace('/', '-', trim($exDateRange[1]));
-
-            $waktuMulai =  Carbon::parse($pertamaRep)->format('Y-m-d');
-            $waktuAkhir = Carbon::parse($duaRep)->format('Y-m-d');
-
-            $getActivities->whereDate('created_at', '>=', $waktuMulai);
-            $getActivities->whereDate('created_at', '<=', $waktuAkhir);
-
+        if(!empty($rangeStart))
+        {
+            $getActivities->whereDate('created_at', '>=', $rangeStart);
             $filter = true;
         }
 
-
+        if(!empty($rangeEnd))
+        {
+            $getActivities->whereDate('created_at', '<=', $rangeEnd);
+            $filter = true;
+        }
 
         if (!empty($descAct)) {
             $getActivities->orWhere('description', 'LIKE', "%{$descAct}%");

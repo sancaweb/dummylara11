@@ -37,7 +37,11 @@
 
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" id="dateRangeFilter" value="" class="form-control rangeDate" placeholder="Waktu">
+                        <div class="input-group mb-3 date input-daterange" id="dateRangeFilter">
+                            <input placeholder="Start Date" type="text" id="rangeStart" name="range-start" class="form-control">
+                            <span class="input-group-text">to</span>
+                            <input placeholder="End Date" type="text" id="rangeEnd" name="range-end" class="form-control">
+                          </div>
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <textarea class="form-control form-control-lg" id="descAct" placeholder="Description"></textarea>
