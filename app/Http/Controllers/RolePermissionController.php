@@ -430,10 +430,6 @@ class RolePermissionController extends Controller
         $permissionsSatu = $getPermissions->take($pembagian);
         $permissionsDua = $getPermissions->slice($pembagian);
 
-        // $permissionsSatu = Permission::offset($startSatu)->limit($pembagian)->get();
-        // $permissionsDua = Permission::offset($startDua)->limit($pembagian)->get();
-
-
 
         $dataPage = [
             'pageTitle' => "Assign Roles & Permissions",
@@ -456,7 +452,7 @@ class RolePermissionController extends Controller
 
             if (count($permissions) <= 0) {
                 return ResponseFormat::success([
-                    'dataPermissions' => '',
+                    'dataPermissions' => [],
                     'dataRole' => $role,
                     'message' => "Please give permission(s) to Role",
                 ], "Permissions Not Found");
