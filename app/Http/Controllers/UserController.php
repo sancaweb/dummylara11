@@ -6,7 +6,6 @@ use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormat;
-use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
