@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
 
 
         /**
-         * PERMISSIONS
+         * PERMISSIONS. for the highest role level
          */
         $permissions = [
             'user create', 'user read', 'user update', 'user delete', 'user destroy',
@@ -49,6 +49,7 @@ class UserSeeder extends Seeder
             'assign sync',
 
             'profile read', 'profile update',
+            'model create', 'model read', 'model update', 'model delete'
 
         ];
 
@@ -104,7 +105,7 @@ class UserSeeder extends Seeder
          * 3. User level
          */
 
-         $user = User::create([
+        $user = User::create([
             'name' => 'User',
             'username' => 'user',
             'email' => "user@email.com",
@@ -122,7 +123,5 @@ class UserSeeder extends Seeder
 
         $roleUser = Role::find(3);
         $roleUser->syncPermissions($userPermissions);
-
-
     }
 }
