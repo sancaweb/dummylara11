@@ -22,7 +22,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="../../index2.html" class="h1">PT Tri Centrum Fortuna</a>
+                <a href="{{ route('home') }}" class="h1">PT Tri Centrum Fortuna</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
