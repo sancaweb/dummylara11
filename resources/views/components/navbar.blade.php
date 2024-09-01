@@ -22,11 +22,7 @@
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-hammer"></i>&nbsp;Destructive Test</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-microscope"></i>&nbsp;Macro</a>
+                        <i class="fas fa-microscope"></i>&nbsp;Next Menu</a>
                 </li>
 
                 @role('super admin')

@@ -99,20 +99,30 @@ class UserSeeder extends Seeder
 
         $admin->assignRole('admin');
 
+
+        /**
+         * 3. User level
+         */
+
+         $user = User::create([
+            'name' => 'User',
+            'username' => 'user',
+            'email' => "user@email.com",
+            'password' => bcrypt('passworduser')
+        ]);
+
+        $user->assignRole('user');
+
         //** give role permissions */
         $roleSuper = Role::find(1);
         $roleSuper->syncPermissions($permissions);
 
         $roleAdmin = Role::find(2);
         $roleAdmin->syncPermissions($adminPermissions);
-        User::factory(10)->create();
-        // User::factory(10)->create([
-        //     'name' => fake()->name(),
-        //     'username' => fake()->name(),
-        //     'email' => fake()->unique()->safeEmail(),
-        //     'password' => bcrypt('passwordadmin'),
-        //     'email_verified_at' => now(),
-        //     'remember_token' => Str::random(10)
-        //     ]);
+
+        $roleUser = Role::find(3);
+        $roleUser->syncPermissions($userPermissions);
+
+
     }
 }

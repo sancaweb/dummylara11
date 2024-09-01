@@ -104,7 +104,7 @@ $(function () {
 
     var modalViewPermissionsOptions = {
         backdrop: false,
-        keyboard:false
+        keyboard: false,
     };
     var modalViewPermissions = new bootstrap.Modal(
         document.getElementById("modalViewPermissions"),
@@ -113,20 +113,13 @@ $(function () {
 
     function formAttribute(dataPermissions) {
         var checkSatu = $(".checkSatu");
+
         $.each(checkSatu, (indexSatu, permitValSatu) => {
+
             if (dataPermissions.includes(permitValSatu.value)) {
                 $("#switchSatu" + indexSatu).prop("checked", true);
             } else {
                 $("#switchSatu" + indexSatu).prop("checked", false);
-            }
-        });
-        var checkDua = $(".checkDua");
-
-        $.each(checkDua, (indexDua, permitValDua) => {
-            if (dataPermissions.includes(permitValDua.value)) {
-                $("#switchDua" + indexDua).prop("checked", true);
-            } else {
-                $("#switchDua" + indexDua).prop("checked", false);
             }
         });
 
@@ -286,5 +279,4 @@ $(function () {
         $(".checkSatu").prop("checked", false);
         $(".checkDua").prop("checked", false);
     });
-
 }); // ./end document
